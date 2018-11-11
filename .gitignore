@@ -1,0 +1,5 @@
+# generated server key
+cert/*
+
+# compiled output by makefile
+bin/*
