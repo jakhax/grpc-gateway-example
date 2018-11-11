@@ -17,7 +17,11 @@ func main() {
 		log.Fatalf("Error: %v", err)
 	}
 
-	conn, err = grpc.Dial("localhost:7777", grpc.WithTransportCredentials(creds))
+	auth := Authentication{
+		Login:    "user",
+		Password: "password",
+	}
+	conn, err = grpc.Dial("localhost:7777", grpc.WithTransportCredentials(creds), grpc.WithPerRPCCredentials(&auth))
 	if err != nil {
 		log.Fatal("Unable to connect to server: %v", err)
 	}

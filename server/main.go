@@ -25,7 +25,10 @@ func main() {
 		log.Fatalf("Error: %v", err)
 	}
 
-	opts := []grpc.ServerOption{grpc.Creds(creds)}
+	opts := []grpc.ServerOption{
+		grpc.Creds(creds),
+		grpc.UnaryInterceptor(unaryInterceptor),
+	}
 
 	// create a grpc server object, returns a pointer
 	grpcServer := grpc.NewServer(opts...)
