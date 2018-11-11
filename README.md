@@ -1,5 +1,8 @@
 # GRPC Gateway Example
 
+a simple client/server system, in Go, with TLS, authentication & REST support for non-grpc compliant clients.
+#### Note: I am not yet finished documenting the branches below, the source code is complete though.
+
 ## Table Of Contents
 - [Introduction](https://github.com/jakhax/grpc-gateway-example/tree/1.introduction)
     * Setup, introduction to grpc in golang & protocol buffers
