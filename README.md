@@ -1,14 +1,19 @@
-# Makefile
+# GRPC Gateway Example
 
-- A makefile will enable us to manage our project easily, in this case we will use a make file to handle the following tasks.
-
-
-```
-api                            Auto-generate grpc go sources
-clean                          Remove previous builds
-client                         Build the binary file for client
-dep                            Get the dependencies
-help                           Display this help screen
-server                         Build the binary file for server
-```
-- Run `make {action}` to execute the action, running `make` without args will execute the actions specified in the makefile `all:` section.
+## Table Of Contents
+- [Introduction](https://github.com/jakhax/grpc-gateway-example/tree/1.introduction)
+    * Setup, introduction to grpc in golang & protocol buffers
+- [Simple GRPC server](https://github.com/jakhax/grpc-gateway-example/tree/2.simple-grpc-server)
+    * Build a simple GRPC server
+- [Simple GRPC client](https://github.com/jakhax/grpc-gateway-example/tree/3.simple-grpc-client)
+    * Create a simple GRPC client
+- [Secure the communication with SSL](https://github.com/jakhax/grpc-gateway-example/tree/4.secure-the-communication)
+    * Secure the client/server communication using SSL.
+- [Simple Client Authentication](https://github.com/jakhax/grpc-gateway-example/tree/5.authenticate-client)
+    * Authenticating the client to the server.
+- [Adding REST support](https://github.com/jakhax/grpc-gateway-example/tree/6.add-rest-support)
+    * Create a REST proxy server to add http/1.1 support, enables non-grpc compliant clients to communicate with the grpc server
+- [Using a Makefile](https://github.com/jakhax/grpc-gateway-example/tree/7.using-a-makefile)
+    * Using a makefile to managed the project tasks such as building binaries & installing dependencies.
+- Adding SSL to REST clients
+    * To add SSL between rest clients and REST proxy server to secure the communication.
