@@ -1,31 +1,14 @@
-# Add REST support
+# Makefile
+
+- A makefile will enable us to manage our project easily, in this case we will use a make file to handle the following tasks.
 
 
-```bash
-go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
-go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
-go get -u github.com/golang/protobuf/protoc-gen-go
 ```
-
-```bash
-#generate by protoc-gen-go
-protoc -I api/ \
-		-I${GOPATH}/src \
-		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-		--go_out=plugins=grpc:api \
-		api/api.proto
-
-#reverse proxy for rest support
-protoc -I api/ \
-		-I${GOPATH}/src \
-		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-		--grpc-gateway_out=logtostderr=true:api \
-		api/api.proto
-
-# swagger file
-protoc -I api/ \
-		-I${GOPATH}/src \
-		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-		--swagger_out=logtostderr=true:api \
-		api/api.proto
+api                            Auto-generate grpc go sources
+clean                          Remove previous builds
+client                         Build the binary file for client
+dep                            Get the dependencies
+help                           Display this help screen
+server                         Build the binary file for server
 ```
+- Run `make {action}` to execute the action, running `make` without args will execute the actions specified in the makefile `all:` section.
