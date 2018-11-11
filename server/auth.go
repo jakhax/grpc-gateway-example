@@ -17,6 +17,13 @@ const (
 	clientIDKey contextKey = iota
 )
 
+func credMatcher(headerName string) (mdName string, ok bool) {
+	if headerName == "Login" || headerName == "Password" {
+		return headerName, true
+	}
+	return "", false
+}
+
 func authenticateClient(ctx context.Context, s *api.Server) (string, error) {
 	if md, ok := metadata.FromIncomingContext(ctx); ok {
 		clientLogin := strings.Join(md["login"], "")

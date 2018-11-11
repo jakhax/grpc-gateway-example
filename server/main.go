@@ -3,39 +3,34 @@ package main
 import (
 	"fmt"
 	"log"
-	"net"
-
-	"github.com/jakhax/grpc-golang-example/api"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
 )
 
 func main() {
-	// server to listen on port 7777
-	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", "localhost", 7777))
-	if err != nil {
-		log.Fatalf("Error Server failed to listen:%v", err)
-	}
-	// create server instance from  api.Server{} struct
-	s := api.Server{}
 
-	// @todo rem to load key path from env
-	creds, err := credentials.NewServerTLSFromFile("cert/server.crt", "cert/server.key")
-	if err != nil {
-		log.Fatalf("Error: %v", err)
-	}
+	grpcAddress := fmt.Sprintf("%s:%d", "localhost", 7777)
 
-	opts := []grpc.ServerOption{
-		grpc.Creds(creds),
-		grpc.UnaryInterceptor(unaryInterceptor),
-	}
+	restAddress := fmt.Sprintf("%s:%d", "localhost", 7778)
+	certFile := "cert/server.crt"
 
-	// create a grpc server object, returns a pointer
-	grpcServer := grpc.NewServer(opts...)
-	// attach the api.Server{} services to the grpc object
-	api.RegisterPingServer(grpcServer, &s)
+	keyFile := "cert/server.key"
 
-	if err := grpcServer.Serve(lis); err != nil {
-		log.Fatalf("Failed to serve: %v", err)
-	}
+	// fire the gRPC server in a goroutine
+	go func() {
+		err := startGRPCServer(grpcAddress, certFile, keyFile)
+		if err != nil {
+			log.Fatalf("failed to start gRPC server: %s", err)
+		}
+	}()
+
+	// fire the REST proxy server in a goroutine
+	go func() {
+		err := startProxyRESTServer(restAddress, grpcAddress, certFile)
+		if err != nil {
+			log.Fatalf("failed to start gRPC server: %s", err)
+		}
+	}()
+
+	log.Printf("Entering infinite loop")
+	select {}
+
 }
