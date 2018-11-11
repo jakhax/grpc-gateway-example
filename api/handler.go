@@ -12,6 +12,6 @@ func (s *Server) SayHello(ctx context.Context, in *PingMessage) (*PingMessage, e
 
 	log.Printf("Message %s \n", in.Greeting)
 
-	return &PingMessage{Greeting: "hello world"}, nill
+	return &PingMessage{Greeting: "hello world"}, nil
 
 }
